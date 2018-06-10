@@ -25,11 +25,18 @@ namespace BigBadManagedInt128
             loQWORD = initialValue;
         }
 
+        public Int128(Int64 loQWORD, Int64 hiQWORD)
+        {
+            this.loQWORD = loQWORD;
+            this.hiQWORD = hiQWORD;
+        }
+
+
         [DllImport("BigBadInt128.dll")]
         private static extern void Int128Add(IntPtr addend1, IntPtr addend2, IntPtr result);
 
         [DllImport("BigBadInt128.dll")]
-        private static extern void Int128ToString(IntPtr input, IntPtr result);
+        private static extern IntPtr Int128ToString(IntPtr input, IntPtr result);
 
         public static Int128 operator+ (Int128 addend1, Int128 addend2)
         {
@@ -51,8 +58,8 @@ namespace BigBadManagedInt128
             IntPtr ptrInput = Marshal.AllocHGlobal(16);
             IntPtr ptrwszBuffer = Marshal.AllocHGlobal(128);
             Marshal.StructureToPtr(this, ptrInput, false);
-            Int128ToString(ptrInput, ptrwszBuffer);
-            string result = Marshal.PtrToStringUni(ptrwszBuffer);
+            IntPtr lpwszString = Int128ToString(ptrInput, ptrwszBuffer);
+            string result = Marshal.PtrToStringUni(lpwszString);
             Marshal.FreeHGlobal(ptrInput);
             Marshal.FreeHGlobal(ptrwszBuffer);
             return result;

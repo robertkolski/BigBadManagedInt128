@@ -10,8 +10,8 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            BigBadManagedInt128.Int128 a = new BigBadManagedInt128.Int128(1);
-            BigBadManagedInt128.Int128 b = new BigBadManagedInt128.Int128(2);
+            BigBadManagedInt128.Int128 a = new BigBadManagedInt128.Int128(34, 1);
+            BigBadManagedInt128.Int128 b = new BigBadManagedInt128.Int128(25, 1);
 
             BigBadManagedInt128.Int128 c = a + b;
 
@@ -19,6 +19,7 @@ namespace TestApplication
             // so printing pieces
             Console.WriteLine(c.loQWORD);
             Console.WriteLine(c.hiQWORD);
+            Console.WriteLine(c);
             Console.ReadLine();
         }
     }
